@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEEN | WEBSITE</title>
+    
+    <!-- Font: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --bg: #050505;
+            --surface: #0f0f11;
+            --surface-hover: #151517;
+            --primary: #ff6b35;
+            --primary-glow: rgba(255, 107, 53, 0.3);
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: rgba(255,255,255,0.08);
+            --font: 'Outfit', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 20%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text.primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffab00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 900; font-size: 24px; letter-spacing: -1px; }
+        
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Glowing Orb Background */
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0,0); }
+            50% { transform: translate(-40px,40px); }
+        }
+
+        .hero-content { position: relative; z-index: 1; text-align: center; }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--primary);
+            background: rgba(255,255,255,0.03);
+            margin-bottom: 24px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(48px, 7vw, 90px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .hero-desc {
+            font-size: clamp(16px, 1.5vw, 20px);
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .btn {
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #050505;
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px var(--primary-glow);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: white;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: black;
+        }
+
+        /* --- SECTIONS --- */
+        .section { padding: 100px 0; }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .section-title p { color: var(--text-muted); }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            background: var(--surface-hover);
+        }
+
+        .card:hover .icon { transform: scale(1.1) rotate(5deg); }
+        
+        .icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 24px;
+            transition: 0.3s;
+        }
+
+        .card h3 { font-size: 22px; margin-bottom: 12px; }
+        .card p { color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+        /* Projects */
+        .projects { background: #080808; }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .project-card:hover { transform: translateY(-10px); }
+        
+        .project-thumb {
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a1d, #131315);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #2a2a2d;
+        }
+
+        .project-info { padding: 28px; }
+        .project-info h3 { font-size: 20px; margin-bottom: 8px; }
+        .project-info p { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; }
+
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag {
+            font-size: 12px;
+            padding: 6px 12px;
+            background: rgba(255,107,53,0.1);
+            color: var(--primary);
+            border-radius: 20px;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        
+        .contact-card:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: translateY(-5px);
+        }
+
+        .contact-card i { font-size: 30px; margin-bottom: 12px; }
+        .contact-card h4 { font-size: 16px; margin-bottom: 4px; }
+        .contact-card p { font-size: 13px; opacity: 0.7; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            color: #444;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { letter-spacing: -1px; }
+            .cta-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">PORTFOLIO.</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="glow-orb"></div>
+        <div class="hero-content container">
+            <div class="hero-badge">✦ Available for Work</div>
+            <h1>
+                Welcome To <br>
+                <span class="gradient-text primary">Radho Portofolio</span>
+            </h1>
+            <p class="hero-desc">
+                Network Technician & Financial Trader.<br>
+                Focused on system stability, data precision, and high-probability trading.
+            </p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>What I Do</h2>
+                <p>Specialized in digital solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="card">
+                    <i class="fas fa-laptop-code icon"></i>
+                    <h3>Network Engineering</h3>
+                    <p>Building and maintaining stable, secure, and high-performance network systems.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-paint-roller icon"></i>
+                    <h3>Algorithmic Trading</h3>
+                    <p>Developing automated trading strategies and analyzing market behavior.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-rocket icon"></i>
+                    <h3>System Optimization</h3>
+                    <p>Optimizing systems, servers, and trading performance for maximum efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Selected Work</h2>
+                <p>Recent projects I've worked on</p>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-thumb"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="project-info">
+                        <h3>Trading Bot System</h3>
+                        <p>Automated trading bot with risk management and smart entry strategy.</p>
+                        <div class="tags">
+                            <span class="tag">MT5</span>
+                            <span class="tag">EA</span>
+                            <span class="tag">Algorithm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb"><i class="fas fa-chart-line"></i></div>
+                    <div class="project-info">
+                        <h3>Network Monitoring System</h3>
+                        <p>Real-time monitoring system for network stability and performance tracking.</p>
+                        <div class="tags">
+                            <span class="tag">Mikrotik</span>
+                            <span class="tag">Networking</span>
+                            <span class="tag">Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="project-info">
+                        <h3>Gold Trading Strategy (XAUUSD)</h3>
+                        <p>High-probability trading strategy focused on XAUUSD with risk control.</p>
+                        <div class="tags">
+                            <span class="tag">XAUUSD</span>
+                            <span class="tag">Scalping</span>
+                            <span class="tag">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Let's Collaborate</h2>
+                <p>Feel free to reach out</p>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:radhohadii@mail.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>radhohadii@mail.com</p>
+                </a>
+                <a href="https://wa.me/6285817390969" class="contact-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>+62 858-1739-0969</p>
+                </a>
+                <a href="https://instagram.com/radhohdii_27" class="contact-card">
+                    <i class="fab fa-instagram"></i>
+                    <h4>Instagram</h4>
+                    <p>@radhohdii_27</p>
+                </a>
+                <a href="https://linkedin.com/in/username" class="contact-card">
+                    <i class="fab fa-linkedin-in"></i>
+                    <h4>LinkedIn</h4>
+                    <p>NOT</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 ZEEN. Crafted with passion.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
